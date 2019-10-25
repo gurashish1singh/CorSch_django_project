@@ -1,0 +1,10 @@
+<h1> Blog Home</h1>
+
+<h3> Posts </h3>
+
+{%for post in posts%}
+    <h4> {{post.title}} </h4>
+    <h7> {{post.author}} </h7>
+    <p> {{post.content}} </p>
+    <small> {{post.date_posted}} </small>
+{%endfor%}
