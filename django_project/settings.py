@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'blog',
+    'users',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -119,5 +121,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+# Changing crispy to bootstrap 4 from 2
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
