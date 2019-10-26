@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .forms import UserRegisterForm
 
 # # Types of messages
@@ -18,9 +20,9 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request,f'Account created for {username}!')
+            messages.success(request,f'Your account has been created. Please Login!!')
 
-            return redirect('blog-home')
+            return redirect('login')
     else:
     # Instatiating an empty form
         form = UserRegisterForm()
@@ -31,3 +33,11 @@ def register(request):
     }
     template_name = 'users/register.html'
     return render(request,template_name,context)
+
+@login_required
+def profile(request):
+    context = {
+
+    }
+    template_name='users/profile.html'
+    return render(request, template_name, context)

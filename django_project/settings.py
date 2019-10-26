@@ -125,4 +125,9 @@ USE_TZ = True
 # Changing crispy to bootstrap 4 from 2
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# Redirecting login and logout views to our custom pages
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'blog-home'
+
+
 STATIC_URL = '/static/'
