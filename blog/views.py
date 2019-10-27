@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -43,7 +44,20 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 4         # Since it is a class based view, paginator is already imprted in that class
     template_name = 'blog/home.html'
+
+
+# Extended the jango built in List view to get author posts
+class UserPostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    paginate_by = 4         # Since it is a class based view, paginator is already imprted in that class
+    template_name = 'blog/user_posts.html'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 # Django built in Detail view
@@ -84,7 +98,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = '/'
-    
+
     # To check if the author wrote that post or not
     def test_func(self):
         post = self.get_object()
