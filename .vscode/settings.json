@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/run/media/gurashishs/Stuff/Programming/virtenv/bin/python"
+    "python.pythonPath": "/run/media/gurashishs/Stuff/Programming/virtenv/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
